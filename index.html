@@ -5,6 +5,227 @@
     <title>你好，GitHub</title>
   </head>
   <body>
-    <h1>WOW</h1>
+   <h1 id="-">四元數</h1>
+<h6 id="tags-math-">tags: <code>Math</code></h6>
+<p>[TOC]</p>
+<h2 id="-">甚麼是四元數?</h2>
+<p>數學家<strong>哈密頓</strong>在1843年創立出的數學概念，通常記為$H$
+大量用於電腦繪圖（及相關的圖像分析）上表示<strong>三維物件的旋轉及方位</strong></p>
+<h3 id="-">小故事時間</h3>
+<p>數學家哈密頓先生一直想尋找<strong>三維的複數係</strong>，在經過柏林的布魯姆大橋時，他驚覺不應該為只為複數係加一個維度，而是<strong>加兩個虛數維度</strong>，為了紀念這件事情，橋上刻了這個故事以及這流傳幾百年的方程式。</p>
+<p><img src="https://i.imgur.com/RSBjZ31.jpg" alt=""></p>
+<h3 id="-">四元數是[<strong>複數的不可交換延伸</strong>]</h3>
+<p>哈密頓將複數 $a+bi$ 延伸為四元數表示成: 
+$$
+q = a+bi+cj+dk=
+\left[
+\begin{array}{}
+a \b \c\d\
+\end{array}
+\right]
+$$其中 $a,b,c,d$ 是實數，虛數單位 $i,j,k$ 滿足基本公式: 
+$$
+i^2=j^2=k^2=ijk=-1
+$$</p>
+<p>四元數的乘法運算定義可由以下表格表示:</p>
+<p><img src="https://i.imgur.com/yMz9cIm.png =220x200" alt="image alt"></p>
+<p>我們發現四元數<strong>乘法的不可交換性</strong>:
+$$
+ij=k \neq ji=-k\
+jk=i \neq kj=-i\
+ki=j \neq ik=-j\
+$$
+相較於複數的乘法，四元數的乘法是不可交換的！！</p>
+<p>另外我們可以將四元數 $q=a+bi+cj+dk$ 視為<strong>純量─向量和</strong> 
+$q=a+\mathbf{v}$，其中 $a$ 是純量，$\mathbf{v}=
+\left[
+\begin{array}{}
+b \c\d\
+\end{array}
+\right]\in\mathbb{R}^3$</p>
+<h2 id="-">基本運算</h2>
+<p>對於 $q_1=a_1+\mathbf{v}_1$ 和 $q_2=a_2+\mathbf{v}_2$</p>
+<ul>
+<li><p>四元數加法：
+$$\displaystyle  q_1+q_2=(a_1+\mathbf{v}_1)+(a_2+\mathbf{v}_2)=(a_1+a_2)+(\mathbf{v}_1+\mathbf{v}_2)$$</p>
+</li>
+<li><p>四元數乘法:
+$$\displaystyle\begin{aligned}  q_1q_2&amp;=(a_1+\mathbf{v}_1)(a_2+\mathbf{v}_2)\  &amp;=(a_1+b_1i+c_1j+d_1k)(a_2+b_2i+c_2j+d_2k)\  &amp;=(a_1a_2-b_1b_2-c_1c_2-d_1d_2)+(a_1b_2+b_1a_2+c_1d_2-d_1c_2)i\    &amp;<del>~~+(a_1c_2-b_1d_2+c_1a_2+d_1b_2)j+(a_1d_2+b_1c_2-c_1b_2+d_1a_2)k\end{aligned}$$
+將
+$$\displaystyle\begin{aligned}\mathbf{v}_1\cdot\mathbf{v}_2&amp;=b_1b_2+c_1c_2+d_1d_2\
+\mathbf{v}_1\times\mathbf{v}_2&amp;=\begin{vmatrix}  i&amp;j&amp;k\  b_1&amp;c_1&amp;d_1\  b_2&amp;c_2&amp;d_2  \end{vmatrix}=(c_1d_2-c_2d_1)i+(d_1b_2-d_2b_1)j+(b_1c_2-b_2c_1)k  \end{aligned}$$
+代入上式，得到
+$$\displaystyle\begin{aligned}  q_1q_2&amp;=(a_1a_2-\mathbf{v}_1\cdot\mathbf{v}_2)+a_1(b_2i+c_2j+d_2k)+a_2(b_1i+c_1j+d_1k)\    &amp;</del>~~+(c_1d_2-d_1c_2)i+(d_1b_2-d_2b_1)j+(b_1c_2-b_2c_1)k\  &amp;=(a_1a_2-\mathbf{v}_1\cdot\mathbf{v}_2)+(a_1\mathbf{v}_2+a_2\mathbf{v}_1+\mathbf{v}_1\times\mathbf{v}_2)  \end{aligned}$$
+另一方面，我們利用分配律可以得到
+$$\displaystyle\begin{aligned}  q_1q_2=(a_1+\mathbf{v}_1)(a_2+\mathbf{v}_2)=a_1a_2+a_1\mathbf{v}_2+a_2\mathbf{v}_1+\mathbf{v}_1\mathbf{v}_2\end{aligned}$$
+這裡定義了向量乘法 $$\displaystyle\begin{aligned}  \mathbf{v}_1\mathbf{v}_2=\mathbf{v}_1\times\mathbf{v}_2-\mathbf{v}_1\cdot\mathbf{v}_2\end{aligned}$$
+表面上，這個運算非常奇怪，因為$\mathbf{v}_1\mathbf{v}_2$ 既非向量也不是純量。所以「向量乘法」僅有形式上的意義，並不具備幾何意義。</p>
+</li>
+<li><p>共軛
+$$\displaystyle\begin{aligned}  q^\ast&amp;=a-\mathbf{v}\<br>\end{aligned}$$</p>
+</li>
+<li>絕對值
+$$\displaystyle\begin{aligned} \vert q\vert&amp;=\sqrt{a^2+\mathbf{v}\cdot\mathbf{v}}=\sqrt{a^2+\Vert\mathbf{v}\Vert^2}=\vert q^\ast\vert\  \end{aligned}$$ </li>
+</ul>
+<h2 id="-q-mathbf-x-q-ast-">定義線性變換 $q\mathbf{x}q^\ast$</h2>
+<p>(p.s.這是為了鋪陳下面的旋轉公式！)</p>
+<p>我們定義一個四元數於 $\mathbb{R}^3$ 的線性變換 $L_q$
+給定一個四元數 $q=a+\mathbf{v}$，定義 $L_q:\mathbb{R}^3\to\mathbb{R}^3$為：
+$$
+\displaystyle  L_q(\mathbf{x})=q\mathbf{x}q^\ast
+$$其中 $\mathbf{x}\in\mathbb{R}^3$ 當作實部等於零的四元數 $0+\mathbf{x}$。
+$$
+\displaystyle\begin{aligned}  q\mathbf{x}q^\ast&amp;=(a+\mathbf{v})(0+\mathbf{x})(a-\mathbf{v})\  &amp;=(-\mathbf{v}\cdot\mathbf{x}+a\mathbf{x}+\mathbf{v}\times\mathbf{x})(a-\mathbf{v})\  &amp;=-(\mathbf{v}\cdot\mathbf{x})a-(a\mathbf{x}+\mathbf{v}\times\mathbf{x})\cdot(-\mathbf{v})+(-\mathbf{v}\cdot\mathbf{x})(-\mathbf{v})\  &amp;<del>~~+a(a\mathbf{x}+\mathbf{v}\times\mathbf{x})+(a\mathbf{x}+\mathbf{v}\times\mathbf{x})\times(-\mathbf{v})\  &amp;=-(\mathbf{v}\cdot\mathbf{x})a+a(\mathbf{x}\cdot\mathbf{v})+(\mathbf{v}\times\mathbf{x})\cdot\mathbf{v}+(\mathbf{v}\cdot\mathbf{x})\mathbf{v}\  &amp;</del>~~+a^2\mathbf{x}+a(\mathbf{v}\times\mathbf{x})-a(\mathbf{x}\times\mathbf{v})-(\mathbf{v}\times\mathbf{x})\times\mathbf{v}\  &amp;=(\mathbf{v}\cdot\mathbf{x})\mathbf{v}+a^2\mathbf{x}+2a(\mathbf{v}\times\mathbf{x})-\mathbf{x}(\mathbf{v}\cdot\mathbf{v})+\mathbf{v}(\mathbf{x}\cdot\mathbf{v})\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{x}+2(\mathbf{v}\cdot\mathbf{x})\mathbf{v}+2a(\mathbf{v}\times\mathbf{x})  \end{aligned}$$
+故證明 $L_q(\mathbf{x})\in\mathbb{R}^3$。
+下面列舉 $L_q$ 的三個重要性質:</p>
+<ol>
+<li>$L_q:\mathbb{R}^3\to\mathbb{R}^3$ 是一個線性變換，也就是說，對於任意 $\mathbf{x},\mathbf{y}\in\mathbb{R}^3$ 和純量 $\alpha\in\mathbb{R}$，
+$$
+\displaystyle  L_q(\mathbf{x}+\mathbf{y})=L_q(\mathbf{x})+L_q(\mathbf{y}),~~~L_q(\alpha\mathbf{x})=\alpha L_q(\mathbf{x})$$
+證明:
+使用上述 $L_q(\mathbf{x})$ 的展開式，
+$$
+\displaystyle\begin{aligned}  L_q(\mathbf{x}+\mathbf{y})&amp;=(a^2-\Vert\mathbf{v}\Vert^2)(\mathbf{x}+\mathbf{y})+2(\mathbf{v}\cdot(\mathbf{x}+\mathbf{y}))\mathbf{v}+2a(\mathbf{v}\times(\mathbf{x}+\mathbf{y}))\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{x}+(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{y}+2(\mathbf{v}\cdot\mathbf{x})\mathbf{v}+2(\mathbf{v}\cdot\mathbf{y})\mathbf{v}+2a(\mathbf{v}\times\mathbf{x})+2a(\mathbf{v}\times\mathbf{y})\  &amp;=L_q(\mathbf{x})+L_q(\mathbf{y})  \end{aligned}
+$$
+且
+$$
+\displaystyle\begin{aligned}  L_q(\alpha\mathbf{x})&amp;=(a^2-\Vert\mathbf{v}\Vert^2)(\alpha\mathbf{x})+2(\mathbf{v}\cdot(\alpha\mathbf{x}))\mathbf{v}+2a(\mathbf{v}\times(\alpha\mathbf{x}))\  &amp;=\alpha(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{x}+2\alpha(\mathbf{v}\cdot\mathbf{x})\mathbf{v}+2\alpha a(\mathbf{v}\times\mathbf{x})\  &amp;=\alpha L_q(\mathbf{x}).  \end{aligned}
+$$</li>
+<li>若 $q=a+\mathbf{v}$ 為單位四元數，即 $\vert q\vert=1$，則每一 $\mathbf{x}\in\mathbb{R}^3$ 滿足 $\Vert L_q(\mathbf{x})\Vert=\Vert\mathbf{x}\Vert$。
+直接計算即可驗證，如下：
+$$
+\displaystyle  \Vert L_q(\mathbf{x})\Vert=\Vert q\mathbf{x}q^\ast\Vert=\vert q\vert~\Vert\mathbf{x}\Vert~\vert q^\ast\vert=\Vert\mathbf{x}\Vert
+$$</li>
+<li>若 $q=a+\mathbf{v}$ 為單位四元數，則 $L_q(\alpha\mathbf{v})=\alpha\mathbf{v}，\alpha\in\mathbb{R}$。
+證明於下：
+$$
+\displaystyle\begin{aligned}  L_q(\alpha\mathbf{v})&amp;=q(\alpha\mathbf{v})q^\ast\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\alpha\mathbf{v}+2(\mathbf{v}\cdot \alpha\mathbf{v})\mathbf{v}+2a(\mathbf{v}\times \alpha\mathbf{v})\  &amp;=\alpha(a^2+\Vert\mathbf{v}\Vert^2)\mathbf{v}=\alpha\vert q\vert^2\mathbf{v}=\alpha\mathbf{v}.  \end{aligned}
+$$</li>
+</ol>
+<h2 id="-">羅德里格旋轉公式</h2>
+<p>若 $q=a+\mathbf{v}$ 為單位四元數，即 $\vert q\vert^2=a^2+\Vert\mathbf{v}\Vert^2=1$。
+設 $a^2=\cos^2\frac{\theta}{2}$ 且 $\Vert\mathbf{v}\Vert^2=\sin^2\frac{\theta}{2}$。
+因此，存在 $\theta\in[0,2\pi)$ 使得 $a=\cos\frac{\theta}{2}$ 且 $\Vert\mathbf{v}\Vert=\sin\frac{\theta}{2}\ge 0$。
+令 $\mathbf{u}=\frac{\mathbf{v}}{\Vert\mathbf{v}\Vert}$。每一個單位四元數 $q=a+\mathbf{v}$ 定可表示為
+$$
+\displaystyle  q=\cos\frac{\theta}{2}+\sin\frac{\theta}{2}\mathbf{u}
+$$</p>
+<p>其中 $\Vert\mathbf{u}\Vert=1$。
+我們想要證明 : 線性變換 $L_q(\mathbf{x})=q\mathbf{x}q^\ast$ 代表 $\mathbf{x}$以單位向量 $\mathbf{u}$ 為轉軸，逆時針旋轉 $\theta$ 徑度。
+<img src="https://i.imgur.com/yEPguVO.png =500x" alt="image alt">
+證明流程:
+將給定向量 $\mathbf{x}$ 分解成 $\mathbf{x}=\mathbf{z}+\mathbf{n}$，其中 $\mathbf{z}$ 是 $\mathbf{x}$ 在轉軸 $\mathbf{u}$ 的正交投影，$\mathbf{n}$ 代表垂直於 $\mathbf{u}$ 的成分。因為 $L_q(\mathbf{x})=L_q(\mathbf{z}+\mathbf{n})=L_q(\mathbf{z})+L_q(\mathbf{n})$，我們要證明 $L_q$ 不改變 $\mathbf{z}$ 且 $L_q$ 將 $\mathbf{n}$ 逆時針旋轉 $\theta$ 角度。</p>
+<ol>
+<li>因為存在唯一 $\alpha\in\mathbb{R}$ 使 $\mathbf{z}=\alpha\mathbf{u}$，由前述性質 (2) 可知 $L_q(\mathbf{z})=\alpha\mathbf{}L_q(\mathbf{u})=\alpha\mathbf{u}=\mathbf{z}$</li>
+<li>利用 $\mathbf{n}\perp\mathbf{u}$，即 $\mathbf{n}\perp\mathbf{v}$，可得
+$$
+\displaystyle\begin{aligned}  L<em>q(\mathbf{n})&amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{n}+2(\mathbf{v}\cdot\mathbf{n})\mathbf{v}+2a(\mathbf{v}\times\mathbf{n})\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{n}+2a(\mathbf{v}\times\mathbf{n})\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{n}+2a\Vert\mathbf{v}\Vert(\mathbf{u}\times\mathbf{n})\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{n}+2a\Vert\mathbf{v}\Vert\mathbf{n}</em>{\perp}  \end{aligned}
+$$</li>
+</ol>
+<p>最後，將 $a=\cos\frac{\theta}{2}$ 和 $\Vert\mathbf{v}\Vert=\sin\frac{\theta}{2}$ 代入 $L_q(\mathbf{n})$ 的表達式，使用倍角公式，
+$$
+\displaystyle\begin{aligned}  L<em>q(\mathbf{n})&amp;=\left(\cos^2\frac{\theta}{2}-\sin^2\frac{\theta}{2}\right)\mathbf{n}+\left(2\cos\frac{\theta}{2}\sin\frac{\theta}{2}\right)\mathbf{n}</em>\perp\  &amp;=\cos\theta\mathbf{n}+\sin\theta\mathbf{n}_\perp,\end{aligned}
+$$
+證明 $L_q(\mathbf{n})$ 即是垂直於轉軸 $\mathbf{u}$ 的平面上 $\mathbf{n}$ 逆時針旋轉 $\theta$ 而得的向量。</p>
+<p>將單位四元數 $q=\cos\frac{\theta}{2}+\sin\frac{\theta}{2}\mathbf{u}$ 代入旋轉變換 $L_q(\mathbf{x})$ 的展開式，套用倍角公式和半角公式，推得
+$$
+\displaystyle\begin{aligned}  L_q(\mathbf{x})&amp;=\left(\cos^2\frac{\theta}{2}-\sin^2\frac{\theta}{2}\right)\mathbf{x}+2\left(\sin\frac{\theta}{2}\mathbf{u}\cdot\mathbf{x}\right)\sin\frac{\theta}{2}\mathbf{u}+2\cos\frac{\theta}{2}\left(\sin\frac{\theta}{2}\mathbf{u}\times\mathbf{x}\right)\  &amp;=\cos\theta\mathbf{x}+(1-\cos\theta)(\mathbf{u}\cdot\mathbf{x})\mathbf{u}+\sin\theta(\mathbf{u}\times\mathbf{x}).  \end{aligned}
+$$</p>
+<p>上式稱為羅德里格旋轉公式 (Rodrigues’ rotation formula)</p>
+<h3 id="-">矩陣形式</h3>
+<p>給定 $\mathbf{u}=(u_1,u_2,u_3)$ 和 $\mathbf{x}=(x_1,x_2,x_3)$，外積運算 $\mathbf{u}\times \mathbf{x}$ 可用矩陣乘法表示如下：
+$$
+\displaystyle  \mathbf{u}\times\mathbf{x}=\begin{bmatrix}  u_2x_3-u_3x_2\  u_3x_1-u_1x_3\  u_1x_2-u_2x_1  \end{bmatrix}=\left[!!\begin{array}{rrr}  0&amp;-u_3&amp;u_2\  u_3&amp;0&amp;-u_1\  -u_2&amp;u_1&amp;0  \end{array}!!\right]\begin{bmatrix}  x_1\  x_2\  x<em>3  \end{bmatrix}=\begin{bmatrix}  \mathbf{u}  \end{bmatrix}</em>{\times}\mathbf{x}，
+$$
+上面我們定義「外積矩陣」為 $\begin{bmatrix}\mathbf{u}  \end{bmatrix}_{\times}=\left[!!\begin{array}{rrr}  0&amp;-u_3&amp;u_2\  u_3&amp;0&amp;-u_1\  -u_2&amp;u_1&amp;0  \end{array}!!\right]$。
+再將內積改寫成 $\mathbf{u}\cdot\mathbf{x}=\mathbf{u}^T\mathbf{x}$，羅德里格旋轉公式可表示成矩陣形式：
+$$
+\displaystyle\begin{aligned}  L<em>q(\mathbf{x})&amp;=\cos\theta I\mathbf{x}+(1-\cos\theta)\mathbf{u}\mathbf{u}^T\mathbf{x}+\sin\theta\begin{bmatrix}  \mathbf{u}  \end{bmatrix}</em>{\times}\mathbf{x}\  &amp;=\left(\cos\theta I+(1-\cos\theta)\mathbf{u}\mathbf{u}^T+\sin\theta\begin{bmatrix}  \mathbf{u}  \end{bmatrix}<em>{\times}\right)\mathbf{x}.  \end{aligned}
+$$
+令 $R</em>\mathbf{u}(\theta)$ 表示旋轉軸為 $\mathbf{u}$，轉角等於 $\theta$ 的 $3\times 3$ 階旋轉矩陣。從上面的羅德里格旋轉公式，可得
+$$
+\displaystyle  \begin{aligned}  R<em>\mathbf{u}(\theta)&amp;=\cos\theta I+(1-\cos\theta)\mathbf{u}\mathbf{u}^T+\sin\theta\begin{bmatrix}  \mathbf{u}  \end{bmatrix}</em>{\times}\  &amp;=\begin{bmatrix}  u_1u_1v\theta+c\theta&amp;u_1u_2v\theta-u_3s\theta&amp;u_1u_3v\theta+u_2s\theta\  u_1u_2v\theta+u_3s\theta&amp;u_2u_2v\theta+c\theta&amp;u_2u_3v\theta-u_1s\theta\  u_1u_3v\theta-u_2s\theta&amp;u_2u_3v\theta+u_1s\theta&amp;u_3u_3v\theta+c\theta  \end{bmatrix},\end{aligned}
+$$
+其中 $c\theta=\cos\theta$，$s\theta=\sin\theta$，$v\theta=1-\cos\theta$。轉角 $\theta$ 的大小由右手法則決定，即大拇指朝向轉軸的正方向 $\mathbf{u}$，其餘四根手指的彎曲方向為旋轉方向。</p>
+<p>旋轉矩陣的另一種表示法:
+給定一個單位四元數 $q=a+\mathbf{v}$，其中 $\mathbf{v}=(b,c,d)^T$，利用 $L_q(\mathbf{x})$ 公式亦可得到以 $a,b,c,d$ 表示的旋轉矩陣 $R$，如下：
+$$
+\displaystyle\begin{aligned}  R\mathbf{x}&amp;=L<em>q(\mathbf{x})=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{x}+2(\mathbf{v}\cdot\mathbf{x})\mathbf{v}+2a(\mathbf{v}\times\mathbf{x})\  &amp;=(a^2-\Vert\mathbf{v}\Vert^2)\mathbf{x}+2\mathbf{v}\mathbf{v}^T\mathbf{x}+2a\begin{bmatrix}  \mathbf{v}\end{bmatrix}</em>\times\mathbf{x}\  &amp;=\left((a^2-\Vert\mathbf{v}\Vert^2)I+2\mathbf{v}\mathbf{v}^T+2a\begin{bmatrix}  \mathbf{v}\end{bmatrix}_\times\right)\mathbf{x}\  &amp;=\begin{bmatrix}  a^2+b^2-c^2-d^2&amp;2bc-2ad&amp;2bd+2ac\  2bc+2ad&amp;a^2-b^2+c^2-d^2&amp;2cd-2ab\  2bd-2ac&amp;2cd+2ab&amp;a^2-b^2-c^2+d^2  \end{bmatrix}\mathbf{x}.  \end{aligned}$$</p>
+<h2 id="-">[實際應用]參考論文</h2>
+<h3 id="-">１. &quot;以追星儀配合一或二軸陀螺儀進行姿態判定之研究&quot;</h3>
+<p>發展一套新式估測演算法用以整合追星儀與陀螺儀的輸出資訊來進
+行衛星姿態判定。</p>
+<ul>
+<li>選定座標系。內文介紹很多常用坐標系，但都是衛星、地心相關。EX:地心座標系...</li>
+<li>姿態表示法。本報告主要以四元數法為主，尤拉角法為輔。
+<strong>原因</strong> : 現當俯仰角(註1)為+/- 90∘時，也就是載具垂直向上或垂直向下飛行，尤拉角法轉換矩陣會發生奇異性(註2)。故利用此方程式來計算姿態的轉換矩陣時，俯仰角會有所限制。</li>
+</ul>
+<p>註:
+ 俯仰角:在航空學中俯仰角表示為機鼻的上/下的旋轉，也等於對附體座標的 y 軸來旋轉。
+ 奇異性:Not full rank，detA = 0。如果A為奇異矩陣，則$Ax=0$有無窮解，$Ax=b$有無窮解或者無解。</p>
+<p> 大致流程圖 :
+ <img src="https://i.imgur.com/rgf0q11.jpg" alt=""></p>
+<h4 id="-">補充追星儀</h4>
+<p>令四元數向量為
+$Q=q_0+iq_1 +jq_2 +kq_3$ 其中
+<img src="https://i.imgur.com/ZfWbrOm.jpg" alt=""></p>
+<p>追星儀可測得以上四項的值</p>
+<h4 id="-">尤拉角與四元數的轉換</h4>
+<p><img src="https://i.imgur.com/HziBeSd.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/fegpAbd.jpg" alt=""></p>
+<p><img src="https://i.imgur.com/83YOmeL.jpg" alt=""></p>
+<p><strong>轉換原因</strong> : 因為尤拉角相較於四元數在平常看時較有物理意義</p>
+<p><strong>論文結果</strong>: 預測姿態結果相當良好!</p>
+<h3 id="2-">2. 以慣性感測訊號進行步態分析與跌倒偵測</h3>
+<p>希望藉由至於脛骨、腳踝等的慣性感測量器測出帕金森氏症的主要症狀，包括步距、步頻、左右步協調等，以及跌倒判斷演算法。</p>
+<p><strong>工具</strong>: 加速規(量測加速度)、陀螺儀(量測角加速度訊號)</p>
+<p><img src="https://i.imgur.com/xvUkx96.jpg" alt=""></p>
+<p>基本卡爾曼濾波器是限制在線性的假設之下。上一篇用的擴展卡爾曼濾波器觀測模型不需要是狀態的線性函數，可替換為（可微的）函數。</p>
+<p><strong>論文結果</strong>:預測的結果不太準確</p>
+<h2 id="-">歐拉角</h2>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Eulerangles.svg/800px-Eulerangles.svg.png =200x200" alt="image alt"></p>
+<p>任何一個三維空間旋轉皆可表示為三個基本旋轉的複合變換。
+採用右手法則，設 $\theta$ 為轉角，稱為歐拉角，$R_X(\theta)，R_Y(\theta)，R_Z(\theta)$ 分別代表對 $X，Y$ 和 $Z$ 軸的旋轉矩陣，如下：
+$$
+\displaystyle  \begin{aligned}  R_X(\theta)&amp;=\begin{bmatrix}  1&amp;0&amp;0\  0&amp;\cos\theta&amp;-\sin\theta\  0&amp;\sin\theta&amp;\cos\theta  \end{bmatrix}\  R_Y(\theta)&amp;=\begin{bmatrix}  \cos\theta&amp;0&amp;\sin\theta\  0&amp;1&amp;0\  -\sin\theta&amp;0&amp;\cos\theta  \end{bmatrix}\  R_Z(\theta)&amp;=\begin{bmatrix}  \cos\theta&amp;-\sin\theta&amp;0\  \sin\theta&amp;\cos\theta&amp;0\  0&amp;0&amp;1  \end{bmatrix}.\end{aligned}$$</p>
+<h3 id="-">性質</h3>
+<ol>
+<li>歐拉角是按照一個固定的坐標軸的順序旋轉的，因此不同的順序會造成不同結果</li>
+<li>歐拉角如果在旋轉中不幸讓某些坐標軸重合，就會發生萬向鎖現象，這時就會丟失一個方向上的旋轉能力，也就是說在這種狀態下，我們無論怎么旋轉，都不可能得到某些想要的結果，除非打破原先的旋轉順序或者同時旋轉三個軸。</li>
+</ol>
+<p><img src="https://pic.pimg.tw/silverwind1982/1525859841-1159909566.png =200x200" alt="image alt"></p>
+<p>萬向鎖解決辦法：將歐拉角轉換為四元數，這種做法缺點在於消耗內存</p>
+<table>
+<thead>
+<tr>
+<th>四元數</th>
+<th>歐拉角</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>複雜</td>
+<td>直觀</td>
+</tr>
+<tr>
+<td>可以避免萬向鎖</td>
+<td>萬向鎖</td>
+</tr>
+<tr>
+<td>存儲空間小，計算效率高</td>
+<td>不同的旋轉順序下會有不同的結果</td>
+</tr>
+<tr>
+<td>不能表示超過180度的旋轉</td>
+<td>可以旋轉大於180度的角度</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-">三元數呢?</h2>
+<p>假設三元數存在，它是以 a+bi+cj的形式表示的數，其中 a、b 和 c 皆是實數，那我們要怎麼表示ij 這個三元數呢
+設 ij=a+bi+cj，其中 a、b 和 c 是實數。</p>
+<p><img src="https://i.imgur.com/oxFIxAa.jpg =350x200" alt="image alt">
+則實部、i 、j 不互相獨立。</p>
+
   </body>
 </html>
